@@ -47,7 +47,7 @@ export default {
 }
 
 .card {
-  border-radius: 25px;
+  border-radius: 25px 0px;
 }
 
 .init h2 {
