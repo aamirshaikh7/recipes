@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '@/components/Index.vue'
+import Init from '@/components/Init.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Index',
-    component: Index
+    name: 'Init',
+    component: Init
   }
 ]
 
