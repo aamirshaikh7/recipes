@@ -4,7 +4,7 @@
       <div class="card-content white-text">
         <h2>{{ recipe.title }}</h2>
         <ul class="ingredients">
-          <li v-for="(ingredient, init) in recipe.ingredients" :key="init">
+          <li v-for="(ingredient, index) in recipe.ingredients" :key="index">
              <span class="chip">{{ ingredient }}</span>
           </li>
         </ul>
@@ -15,15 +15,14 @@
 </template>
 
 <script>
+import database from '@/firebase/init'
+
 export default {
   name: 'Init',
   
   data () {
     return {
-      recipes: [
-        { title: 'Noodle pie', slug: 'noodle-pie', ingredients: ['noodle', 'soup', 'pie'], id: '1' },
-        { title: 'Mango pie', slug: 'mango-pie', ingredients: ['mango', 'soup', 'creme'], id: '2' }
-      ]
+      recipes: []
     }
   },
 
@@ -33,6 +32,22 @@ export default {
         return recipe.id !== id;
       });
     }
+  },
+
+  created() {
+    // Retrieve data from the firestore
+
+    database.collection('recipes').get()
+      .then(items => {
+        items.forEach(item => {
+          //  console.log(item.id, item.data());
+          
+          let recipe = item.data();
+          recipe.id = item.id;
+
+          this.recipes.push(recipe);
+        });
+      })
   }
 }
 </script>
