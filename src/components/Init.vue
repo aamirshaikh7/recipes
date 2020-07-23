@@ -28,9 +28,21 @@ export default {
 
   methods: {
     deleteRecipe (id) {
-      this.recipes = this.recipes.filter(recipe => {
-        return recipe.id !== id;
-      });
+      // console.log(id);
+
+      // deleting recipe from firestore
+
+      database.collection('recipes').doc(id).delete()
+        .then(() => {
+          this.recipes = this.recipes.filter(recipe => {
+            return recipe.id !== id;
+          });
+        })
+        .catch(err => console.log(err));
+
+      // this.recipes = this.recipes.filter(recipe => {
+      //   return recipe.id !== id;
+      // });
     }
   },
 
@@ -48,6 +60,7 @@ export default {
           this.recipes.push(recipe);
         });
       })
+      .catch(err => console.log(err));
   }
 }
 </script>
@@ -85,7 +98,7 @@ export default {
   right: 8px;
   color: #f22;
   cursor: pointer;
-  font-size: 2.2em;
+  font-size: 2.1em;
 }
 
 .init .delete:hover {
