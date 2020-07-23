@@ -2,11 +2,11 @@
     <div class="navbar"> 
         <nav class="nav-extended">
             <div class="nav-content">
-                <router-link to="">
+                <router-link :to="{ name: 'Index' }">
                     <span class="nav-title">Recipes</span>
                 </router-link>
                 <a href="" class="btn-floating halfway-fab black">
-                    <router-link to="">
+                    <router-link :to="{ name: 'AddRecipe' }">
                         <i class="material-icons">add</i>
                     </router-link>
                 </a>

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Init from '@/components/Init.vue'
+import AddRecipe from '@/components/AddRecipe.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +11,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Init',
     component: Init
+  },
+  {
+    path: '/add-recipe',
+    name: 'AddRecipe',
+    component: AddRecipe
   }
 ]
 
