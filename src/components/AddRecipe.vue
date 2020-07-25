@@ -8,9 +8,11 @@
             </div>
             <div class="ingredient custom-field">
                 <label for="ingredient">Add Ingredients :</label>
-                <input name="ingredient" type="text" placeholder="Add Recipe Ingredients">
+                <input v-model="anotherIngredient" name="ingredient" type="text" placeholder="Add Recipe Ingredients">
+                <i class="material-icons addAnotherIngredient" @click="addAnotherIngredient">add</i>
             </div>
             <div class="center custom-field">
+                <p v-if="msg !== ''"><strong>{{ msg }}</strong><i class="material-icons msgRed">priority_high</i></p>
                 <button class="btn black">
                     <span>Add </span>
                     <i class="material-icons">add</i>
@@ -26,13 +28,32 @@ export default {
 
     data () {
         return {
-            title: ''
+            msg: '',
+            title: '',
+            anotherIngredient: '',
+            ingredients: []
         }
     },
 
     methods: {
         addRecipe() {
-            console.log(this.title);
+            if(this.title !== '') {
+                console.log(this.title, this.ingredients);
+            }
+        },
+
+        addAnotherIngredient() {
+            if(this.anotherIngredient !== '') {
+                this.ingredients.push(this.anotherIngredient);
+                
+                // console.log(this.ingredients);
+
+                this.anotherIngredient = '';
+
+                this.msg = '';
+            } else {
+                this.msg = 'You must add an Ingredient';
+            }
         }
     }
 }
@@ -44,8 +65,9 @@ export default {
 }
 
 .custom-field span {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     line-height: inherit;
+    text-transform: lowercase;
 }
 
 .add-recipe {
@@ -59,11 +81,28 @@ export default {
 }
 
 .add-recipe .custom-field {
+    position: relative;
     margin: 15px auto;
 }
 
 .add-recipe .custom-field label {
     font-size: 1rem;
     color: #000;
+}
+
+.ingredient .addAnotherIngredient {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    cursor: pointer;
+    font-size: 1.3em;
+    color: #2424ec;
+}
+
+.add-recipe .custom-field .msgRed {
+    position: absolute;
+    cursor: pointer;
+    font-size: 1.3em;
+    color: red;
 }
 </style>
