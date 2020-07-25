@@ -6,11 +6,20 @@
                 <label for="title">Recipe Title :</label>
                 <input v-model="title" name="title" type="text" placeholder="Add Recipe Title">
             </div>
+
+            <div class="custom-field">
+                <div v-for="(ingredient, index) in ingredients" :key="index">
+                    <label for="addedIngredient">Ingredient :</label>
+                    <input v-model="ingredients[index]" type="text" name="addedIngredient">
+                </div>
+            </div>
+
             <div class="ingredient custom-field">
-                <label for="ingredient">Add Ingredients :</label>
+                <label for="ingredient">{{ ingredientTitle }} :</label>
                 <input v-model="anotherIngredient" name="ingredient" type="text" placeholder="Add Recipe Ingredients">
                 <i class="material-icons addAnotherIngredient" @click="addAnotherIngredient">add</i>
             </div>
+
             <div class="center custom-field">
                 <p v-if="msg !== ''"><strong>{{ msg }}</strong><i class="material-icons msgRed">priority_high</i></p>
                 <button class="btn black">
@@ -28,6 +37,7 @@ export default {
 
     data () {
         return {
+            ingredientTitle: 'Ingredient',
             msg: '',
             title: '',
             anotherIngredient: '',
@@ -44,6 +54,8 @@ export default {
 
         addAnotherIngredient() {
             if(this.anotherIngredient !== '') {
+                this.ingredientTitle = 'Another Ingredient';
+                
                 this.ingredients.push(this.anotherIngredient);
                 
                 // console.log(this.ingredients);
