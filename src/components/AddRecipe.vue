@@ -6,7 +6,7 @@
                 <label for="title">Recipe Title :</label>
                 <input v-model="title" name="title" type="text" placeholder="Add Recipe Title">
             </div>
-
+            
             <div class="custom-field">
                 <div v-for="(ingredient, index) in ingredients" :key="index">
                     <label for="addedIngredient">Ingredient :</label>
@@ -32,6 +32,9 @@
 </template>
 
 <script>
+import database from '@/firebase/init'
+import slugify from 'slugify'
+
 export default {
     name: 'AddRecipe',
 
@@ -41,14 +44,33 @@ export default {
             msg: '',
             title: '',
             anotherIngredient: '',
-            ingredients: []
+            ingredients: [],
+            slug: ''
         }
     },
 
     methods: {
         addRecipe() {
             if(this.title !== '') {
-                console.log(this.title, this.ingredients);
+                // console.log(this.title, this.ingredients);
+            
+                this.msg = '';
+
+                this.slug = slugify(this.title, {
+                    lower: true,
+                    replacement: '-',
+                    remove: /[$*_~.+,()'"!\-:@]/g,
+                });
+
+                database.collection('recipes').add({
+                    title: this.title,
+                    ingredients: this.ingredients,
+                    slug: this.slug
+                })
+                    .then(() => this.$router.push({ name: 'Init' }))
+                    .catch(err => console.log(err));
+            } else {
+                this.msg = 'You must fill in all the fields';
             }
         },
 
