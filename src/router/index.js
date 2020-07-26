@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Init from '@/components/Init.vue'
 import AddRecipe from '@/components/AddRecipe.vue'
+import EditRecipe from '@/components/EditRecipe.vue'
 
 Vue.use(VueRouter)
 
@@ -12,10 +13,17 @@ Vue.use(VueRouter)
     name: 'Init',
     component: Init
   },
+
   {
     path: '/add-recipe',
     name: 'AddRecipe',
     component: AddRecipe
+  },
+
+  {
+    path: '/edit-recipe/:slug_param',
+    name: 'EditRecipe',
+    component: EditRecipe
   }
 ]
 

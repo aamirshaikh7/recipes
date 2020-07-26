@@ -8,6 +8,9 @@
              <span class="chip">{{ ingredient }}</span>
           </li>
         </ul>
+        <router-link :to="{ name: 'EditRecipe', params: { slug_param: recipe.slug } }">
+          <i class="material-icons edit">edit</i>
+        </router-link>
         <i class="material-icons delete" @click="deleteRecipe(recipe.id)">delete</i>
       </div>
     </div>
@@ -104,5 +107,14 @@ export default {
 .init .delete:hover {
   transition: all .5s;
   color: #f00;
+}
+
+.init .edit {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 2em;
 }
 </style>
