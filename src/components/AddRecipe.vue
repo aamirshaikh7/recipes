@@ -7,10 +7,11 @@
                 <input v-model="title" name="title" type="text" placeholder="Add Recipe Title">
             </div>
             
-            <div class="custom-field">
-                <div v-for="(ingredient, index) in ingredients" :key="index">
+            <div>
+                <div class="custom-field" v-for="(ingredient, index) in ingredients" :key="index">
                     <label for="addedIngredient">Ingredient :</label>
                     <input v-model="ingredients[index]" type="text" name="addedIngredient">
+                    <i class="material-icons delete" @click="deleteIngredient(ingredient)">delete</i>
                 </div>
             </div>
 
@@ -88,6 +89,12 @@ export default {
             } else {
                 this.msg = 'You must add an Ingredient';
             }
+        },
+
+        deleteIngredient(ingredient) {
+            this.ingredients = this.ingredients.filter(item => {
+                return ingredient !== item;
+            });
         }
     }
 }
@@ -138,5 +145,19 @@ export default {
     cursor: pointer;
     font-size: 1.3em;
     color: red;
+}
+
+.add-recipe .delete {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    cursor: pointer;
+    font-size: 1.3em;
+    color: rgb(185, 40, 40);
+}
+
+.add-recipe .delete:hover {
+    transition: all .5s;
+    color: #f00;
 }
 </style>
