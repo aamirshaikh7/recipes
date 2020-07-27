@@ -1,18 +1,32 @@
 <template>
-    <div class="container edit-recipe">
+    <div v-if="recipe !== ''" class="container edit-recipe">
+        <h4 class="center">Recipe Title : <strong class="upper">{{ recipe.title }}</strong></h4>
         <h2 class="center">Edit Recipe</h2>
-        <h4 class="center">Recipe Title : <strong>{{ this.$route.params.slug_param }}</strong></h4>
     </div>
 </template>
 
 <script>
+import database from '@/firebase/init'
+
 export default {
     name: 'EditRecipe',
 
     data() {
         return {
-            
+            recipe: ''
         }
+    },
+
+    created() {
+        database.collection('recipes').where('slug', '==', this.$route.params.slug_param)
+            .get()
+            .then(items => {
+                items.forEach(item => {
+                    this.recipe = item.data();
+                    this.recipe.id = item.id;
+                });
+            })
+            .catch(err => console.log(err));
     }
 }
 </script>
@@ -26,5 +40,13 @@ export default {
 
 .edit-recipe h2, h4 {
     font-weight: lighter;
+}
+
+h2 {
+    margin: inherit;
+}
+
+.edit-recipe .upper {
+    text-transform: uppercase;
 }
 </style>
