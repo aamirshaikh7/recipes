@@ -11,7 +11,7 @@
                 <div class="custom-field" v-for="(ingredient, index) in ingredients" :key="index">
                     <label for="addedIngredient">Ingredient :</label>
                     <input v-model="ingredients[index]" type="text" name="addedIngredient">
-                    <i class="material-icons delete" @click="deleteIngredient(ingredient)">delete</i>
+                    <i class="material-icons delete" @click="deleteIngredient(ingredient)">delete_forever</i>
                 </div>
             </div>
 
@@ -136,7 +136,7 @@ export default {
     right: 0;
     bottom: 15px;
     cursor: pointer;
-    font-size: 1.3em;
+    font-size: 1.8em;
     color: #2424ec;
 }
 
@@ -152,7 +152,7 @@ export default {
     right: 0;
     bottom: 15px;
     cursor: pointer;
-    font-size: 1.3em;
+    font-size: 1.8em;
     color: rgb(185, 40, 40);
 }
 
